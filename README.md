@@ -35,6 +35,9 @@ Test the funcionality of this code using Postman (or other web API testing appli
 | /user/{name of a user} | GET     | Returns a List of all users with that first name.  |
 | /user/{email of a user} | GET     | Returns a List of all users with that email.  |
 | /user/save | POST     | Saves a new user to the DB  |
+| /product/all  | GET    | Returns All Products |
+| /product/{name of a product} | GET     | Returns a List of all products with that name.  |
+| /product/{price of a product} | GET     | Returns a List of all users with that email.  |
 
 ## Tests Instructions
 Tests for some of the funcionalities of the application are provided and must be run as JUNIT tests. 
