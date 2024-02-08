@@ -28,7 +28,8 @@ class ShoppingCartJpaExApplicationTests {
 		User user = new User();
 		user.setName("Xime");
 		user.setLastName("Cu");
-		user.setEmail("name@email.com");
+		//email has to be unique, test will throw and error if this email alrady exists in the DB
+		user.setEmail("somename@email.com");
 		user.setBio("Bio");
 		user.setAreaOfInterest("Books");
 		
@@ -60,16 +61,9 @@ class ShoppingCartJpaExApplicationTests {
 		inputStream.close();
 	}
 	
-	@Test
-	void findAllUsers() {
-		System.out.println("-------------------------"+usersRepo.findAll());
-	}
 	
-	@Test
-	void showME() {
-		List<String> existingProducts = productsRepo.findAllNames();
-		System.out.println("........."+existingProducts);
-	}
+	
+	
 	
 
 	
