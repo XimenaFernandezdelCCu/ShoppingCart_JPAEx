@@ -43,7 +43,7 @@ public class UserController {
 	
 	@PostMapping("/save")
 	public ResponseEntity<Object> insertNewUser(@RequestBody User user) {
-		List<String> existingEmails = repository.findAllEmails();
+		List<String> existingEmails = repository.findAllEmail();
 		String newEmail = user.getEmail();
 		
 		for (String mail : existingEmails) {
@@ -56,6 +56,8 @@ public class UserController {
 		User savedUser = repository.save(user);
 	    return ResponseEntity.ok(savedUser);
 	}
+	
+	
 
 		
 
