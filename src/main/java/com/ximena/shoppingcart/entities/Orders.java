@@ -5,7 +5,6 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,15 +25,14 @@ public class Orders {
 	
 	@Temporal(TemporalType.DATE)
 	private java.util.Date orderDate;
-	//private Date orderDate;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ID", nullable= false)
 	private User user;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy="orders"
-	@JoinColumn(name = "ORDER_ID" , nullable= false)
-	private List<Products> products;
+	//@OneToMany(cascade=CascadeType.ALL)
+	//@JoinColumn(name = "ORDER_ID" , nullable= false)
+	//private List<Products> products;
 
 	public int getOrderId() {
 		return orderId;
@@ -60,13 +58,7 @@ public class Orders {
 		this.user = user;
 	}
 
-	public List<Products> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Products> products) {
-		this.products = products;
-	}
+	
 	
 	
 	

@@ -9,7 +9,7 @@ import com.ximena.shoppingcart.entities.User;
 
 public interface UsersRepository extends CrudRepository<User, Integer> {
 	
-	//@Query("SELECT * FROM User")
+	
 	@Query(value = "SELECT email FROM users", nativeQuery = true)
 	List<String> findAllEmail();
 	
