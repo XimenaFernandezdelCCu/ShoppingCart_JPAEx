@@ -1,12 +1,16 @@
 package com.ximena.shoppingcart.controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import org.springframework.boot.web.server.MimeMappings.Mapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +62,22 @@ public class UserController {
 	}
 	
 	
-
+	@PutMapping("/edit/{id}")
+	public ResponseEntity<Object> editUser(@RequestBody  Map<String, Object> changes, @PathVariable("id") int id){
+		Optional<User> optionalUser = repository.findById(id);
+		if (!optionalUser.isPresent()) {
+			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+		}	
+		User user = optionalUser.get();
+		user.setEmail((String) changes.get("email"));
+		user.setAreaOfInterest((String) changes.get("areaOfInterest"));
+        repository.save(user); 
+        
+        return ResponseEntity.ok(user); 
+		
+		
+	}
 		
 
 }
