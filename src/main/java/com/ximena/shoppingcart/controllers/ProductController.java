@@ -36,10 +36,8 @@ public class ProductController {
 		}
 				
 	}
-	//@GetMapping("/{price}")
-	//public List<Products> getProductbyprice(@PathVariable("price") double price) {
-		//	return repository.findByPrice(price);		
-	//}
+	
+	
 	
 
 }
