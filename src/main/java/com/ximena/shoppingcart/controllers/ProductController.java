@@ -1,17 +1,21 @@
 package com.ximena.shoppingcart.controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ximena.shoppingcart.entities.Products;
+import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.repos.ProductsRepository;
 
 @RestController
@@ -58,6 +62,24 @@ public class ProductController {
 		
 		Products newProduct =  repository.save(product);
 		return ResponseEntity.ok(newProduct);
+	}
+	
+	@PutMapping("/edit/{id}")
+	public ResponseEntity<Object> editProduct(@RequestBody  Map<String, Object> changes, @PathVariable("id") int id){
+		Optional<Products> optionalProduct = repository.findById(id);
+		if (!optionalProduct.isPresent()) {
+			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+		}	
+		Products product = optionalProduct.get();
+		product.setPrice((double) changes.get("price"));
+		product.setImage((byte[]) changes.get("image"));
+		product.setDescription((String) changes.get("description"));
+		product.setTotalProductsInventory((int) changes.get("totalProductsInventory"));
+        repository.save(product); 
+        
+        
+        return ResponseEntity.ok(product); 
 	}
 	
 	
