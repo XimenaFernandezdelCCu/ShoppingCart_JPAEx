@@ -8,6 +8,7 @@ import com.ximena.shoppingcart.entities.Products;
 public interface ProductsRepository extends CrudRepository<Products, Integer> {
 	
 	List<Products> findByName(String name);
+	List<Products> findByPrice(double price);
 	
 
 }
