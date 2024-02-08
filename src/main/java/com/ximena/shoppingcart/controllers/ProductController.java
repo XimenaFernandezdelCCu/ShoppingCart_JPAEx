@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ximena.shoppingcart.entities.Products;
-import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.repos.ProductsRepository;
 
 @RestController
@@ -79,6 +78,21 @@ public class ProductController {
         repository.save(product); 
         
         
+        return ResponseEntity.ok(product); 
+	}
+	
+	@PutMapping("/delete/{id}")
+	public ResponseEntity<Object> virtualDelete(@PathVariable("id") int id){
+		
+		Optional<Products> optionalProduct = repository.findById(id);
+		if (!optionalProduct.isPresent()) {
+			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+		}	
+		Products product = optionalProduct.get();
+		product.setStatus(false);
+        repository.save(product); 
+       
         return ResponseEntity.ok(product); 
 	}
 	
