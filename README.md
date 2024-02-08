@@ -41,6 +41,8 @@ Test the funcionality of this code using Postman (or other web API testing appli
 | /product/{name of a product} | GET     | Returns a List of all products with that name.  |
 | /product/{price of a product} | GET     | Returns a List of all users with that email.  |
 | /product/save | POST     | Saves a new product to the DB or increments the inventory of an existing product by one.  |
+| /product/edit/{id} | PUT | Update price, image, description and total_products_inventory of a Product. |
+| /product/delete/{id} | PUT | Sets the Status collumn of a product to false. |
 
 
 ### Request Body Format Examples
