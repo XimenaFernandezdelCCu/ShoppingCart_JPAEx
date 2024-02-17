@@ -1,8 +1,10 @@
 package com.ximena.shoppingcart.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 
@@ -10,8 +12,10 @@ import jakarta.persistence.Lob;
 public class Products {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private int productId;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(generator = "custom-id")
+    @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomIdGenerator.class)
+	private java.math.BigDecimal productId;
 	private String name; 
 	private double price;
 	@Lob
@@ -20,10 +24,10 @@ public class Products {
 	private int totalProductsInventory;
 	private boolean status;
 	
-	public int getProductId() {
+	public java.math.BigDecimal getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(java.math.BigDecimal productId) {
 		this.productId = productId;
 	}
 	public String getName() {

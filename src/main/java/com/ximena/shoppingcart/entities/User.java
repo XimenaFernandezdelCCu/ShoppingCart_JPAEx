@@ -1,12 +1,10 @@
 package com.ximena.shoppingcart.entities;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -15,19 +13,23 @@ import jakarta.persistence.Table;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)  for auto_increment 
+	//@GenericGenerator(name="user_id", strategy="com.ximena.shoppingcart.CustomIdGenerator") deprecated 
+	
+	@GeneratedValue(generator = "custom-id")
+    @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomUserIdGenerator.class)
 	@Column(name = "USER_ID")
-	private int userId;
+	private java.math.BigDecimal userId;
 	private String name; 
 	private String lastName;
 	private String bio;
 	private String email;
 	private String areaOfInterest;
 	
-	public int getUserId() {
+	public java.math.BigDecimal getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(java.math.BigDecimal userId) {
 		this.userId = userId;
 	}
 	public String getName() {

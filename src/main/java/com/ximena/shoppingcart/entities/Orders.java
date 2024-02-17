@@ -1,12 +1,13 @@
 package com.ximena.shoppingcart.entities;
 
 //import java.sql.Date;
-import java.util.List;
+
+
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -20,8 +21,10 @@ import jakarta.persistence.TemporalType;
 public class Orders {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private int orderId;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(generator = "custom-id")
+    @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomIdGenerator.class)
+	private java.math.BigDecimal orderId;
 	
 	@Temporal(TemporalType.DATE)
 	private java.util.Date orderDate;
@@ -34,11 +37,11 @@ public class Orders {
 	//@JoinColumn(name = "ORDER_ID" , nullable= false)
 	//private List<Products> products;
 
-	public int getOrderId() {
+	public java.math.BigDecimal getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(java.math.BigDecimal orderId) {
 		this.orderId = orderId;
 	}
 

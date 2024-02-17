@@ -64,7 +64,7 @@ public class ProductController {
 	}
 	
 	@PutMapping("/edit/{id}")
-	public ResponseEntity<Object> editProduct(@RequestBody  Map<String, Object> changes, @PathVariable("id") int id){
+	public ResponseEntity<Object> editProduct(@RequestBody  Map<String, Object> changes, @PathVariable("id") java.math.BigDecimal id){
 		Optional<Products> optionalProduct = repository.findById(id);
 		if (!optionalProduct.isPresent()) {
 			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
@@ -82,7 +82,7 @@ public class ProductController {
 	}
 	
 	@PutMapping("/delete/{id}")
-	public ResponseEntity<Object> virtualDelete(@PathVariable("id") int id){
+	public ResponseEntity<Object> virtualDelete(@PathVariable("id") java.math.BigDecimal id){
 		
 		Optional<Products> optionalProduct = repository.findById(id);
 		if (!optionalProduct.isPresent()) {

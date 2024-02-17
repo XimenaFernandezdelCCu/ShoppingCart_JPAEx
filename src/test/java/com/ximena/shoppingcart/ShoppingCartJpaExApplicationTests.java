@@ -3,7 +3,10 @@ package com.ximena.shoppingcart;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ class ShoppingCartJpaExApplicationTests {
 	@Autowired
 	OrdersRepository ordersRepo;
 
-	@Test
+	/*@Test
 	void InsertNewUser() {
 		User user = new User();
 		user.setName("Xime");
@@ -59,7 +62,23 @@ class ShoppingCartJpaExApplicationTests {
 		
 		productsRepo.save(product);
 		inputStream.close();
+	}*/
+	
+	@Test 
+	void showIdList() {
+		List<java.math.BigDecimal> idList = usersRepo.findAllIds();
+		
+		try {
+			BigDecimal maxId = Collections.max(idList);
+			System.out.println("-------------"+maxId);
+		} catch (NoSuchElementException e) {
+			System.out.println("-------------"+1);
+		}
+		
+		
+		
 	}
+	
 	
 	
 	

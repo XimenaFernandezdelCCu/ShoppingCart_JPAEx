@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,23 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.repos.UsersRepository;
+import com.ximena.shoppingcart.services.UserService;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
+	
+	
+	@Autowired
 	private UsersRepository repository;
 	
-	//@Autowired
-	UserController(UsersRepository repository){
-		this.repository = repository;
-	}
+	@Autowired
+	private UserService service; 
 	
+	// gets all users 
 	@GetMapping("/all")
 	public List<User> getUsers(){
 		return (List<User>) repository.findAll();  
 	}
 	
+	//finds one user by email or by name.
 	@GetMapping("/{arg}")
 	//public List<User> getUser(@RequestParam("arg") String arg) {
 	public List<User> getUser(@PathVariable("arg") String arg) {
@@ -45,6 +50,7 @@ public class UserController {
 		
 	}
 	
+	// saves a new user to DB with details provided in the request body 
 	@PostMapping("/save")
 	public ResponseEntity<Object> insertNewUser(@RequestBody User user) {
 		List<String> existingEmails = repository.findAllEmail();
@@ -61,9 +67,9 @@ public class UserController {
 	    return ResponseEntity.ok(savedUser);
 	}
 	
-	
+	// Edits a user's (found by their id) email and area of interest. 
 	@PutMapping("/edit/{id}")
-	public ResponseEntity<Object> editUser(@RequestBody  Map<String, Object> changes, @PathVariable("id") int id){
+	public ResponseEntity<Object> editUser(@RequestBody  Map<String, Object> changes, @PathVariable("id") java.math.BigDecimal id){
 		Optional<User> optionalUser = repository.findById(id);
 		if (!optionalUser.isPresent()) {
 			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
@@ -77,8 +83,9 @@ public class UserController {
         return ResponseEntity.ok(user); 
 	}
 		
+	// Deletes a user.
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Object> deleteUser(@PathVariable("id") int id){
+	public ResponseEntity<Object> deleteUser(@PathVariable("id") java.math.BigDecimal id){
 	
 		Optional<User> optionalUser = repository.findById(id);
 		if (!optionalUser.isPresent()) {
