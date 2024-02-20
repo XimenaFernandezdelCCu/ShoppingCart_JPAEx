@@ -56,6 +56,12 @@ public class WishlistServiceImpl implements WishlistService {
 		return ResponseEntity.ok(repository.findByUserId(user.get())); 
 	}
 	
+	// ----------- Get Wishlist from User ID
+	public List<Wishlist> getWishlistByUserId(BigDecimal userId){
+		Optional<User> user = userRepository.findById(userId);
+		return repository.findByUserId(user.get());
+	}
+	
 		
 
 }
