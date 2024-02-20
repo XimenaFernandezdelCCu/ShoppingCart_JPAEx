@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserService {
 	
 	// ------------ Saves New User to the DB 
 	public ResponseEntity<Object> insertNewUser(User user) {
-		java.math.BigDecimal newId = generateID();
 		
 		ArrayList<String> existingEmails = repository.findAllEmail();
 		String newEmail = user.getEmail();

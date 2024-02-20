@@ -26,6 +26,17 @@ public class User {
 	private String email;
 	private String areaOfInterest;
 	
+	
+	
+	public User(String name, String lastName, String bio, String email, String areaOfInterest) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.bio = bio;
+		this.email = email;
+		this.areaOfInterest = areaOfInterest;
+	}
+	
 	public java.math.BigDecimal getUserId() {
 		return userId;
 	}

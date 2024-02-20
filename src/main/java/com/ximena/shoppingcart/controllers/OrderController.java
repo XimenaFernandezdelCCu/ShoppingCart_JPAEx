@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ximena.shoppingcart.entities.Order;
 import com.ximena.shoppingcart.entities.Product;
-import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.repos.OrdersRepository;
 import com.ximena.shoppingcart.services.OrderService;
 
@@ -39,19 +38,19 @@ public class OrderController {
 	
 	// ------------  finds one user by email or by name.
 	@GetMapping("/{arg}")
-	public Optional<Order> getOneOrder(@PathVariable("arg") java.math.BigDecimal arg) {
+	public Optional<Order> getOneOrder(@PathVariable("arg") BigDecimal arg) {
 		return service.getOneOrder(arg);
 	}
 	
 	@GetMapping("/{arg}/product")
-	public Product getOrderProducts(@PathVariable("arg") java.math.BigDecimal arg) {
+	public Product getOrderProducts(@PathVariable("arg") BigDecimal arg) {
 		return  service.getOrderProducts(arg);
 	}
 	
 	@PostMapping("/buy/{id}")
 	public ResponseEntity<Object> buyProduct(
 			@RequestBody Map<String,  Object[]> productIdArray, 
-			@PathVariable("id")java.math.BigDecimal userId){
+			@PathVariable("id")BigDecimal userId){
 		return service.buyProduct(productIdArray, userId);
 	}
 }

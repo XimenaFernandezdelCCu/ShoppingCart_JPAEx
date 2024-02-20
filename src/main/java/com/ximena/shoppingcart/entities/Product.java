@@ -26,6 +26,19 @@ public class Product {
 	private int totalProductsInventory;
 	private boolean status;
 	
+	
+	
+	public Product(String name, double price, byte[] image, String description, int totalProductsInventory,
+			boolean status) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.image = image;
+		this.description = description;
+		this.totalProductsInventory = totalProductsInventory;
+		this.status = status;
+	}
+	
 	public java.math.BigDecimal getProductId() {
 		return productId;
 	}

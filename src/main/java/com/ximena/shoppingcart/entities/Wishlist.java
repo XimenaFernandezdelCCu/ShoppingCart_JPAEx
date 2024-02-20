@@ -25,7 +25,7 @@ public class Wishlist {
 	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product productId;
-
+	
 	public java.math.BigDecimal getWishId() {
 		return wishId;
 	}

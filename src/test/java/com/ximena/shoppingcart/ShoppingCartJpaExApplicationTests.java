@@ -1,17 +1,12 @@
 package com.ximena.shoppingcart;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.ximena.shoppingcart.entities.*;
 import com.ximena.shoppingcart.repos.OrdersRepository;
 import com.ximena.shoppingcart.repos.ProductsRepository;
 import com.ximena.shoppingcart.repos.UsersRepository;
