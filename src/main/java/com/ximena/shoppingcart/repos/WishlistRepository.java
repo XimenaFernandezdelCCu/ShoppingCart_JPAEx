@@ -22,19 +22,7 @@ public interface WishlistRepository extends CrudRepository<Wishlist, java.math.B
 	
 	List<Wishlist> findByUserId(User userId);
 	
-	@Modifying
-	@Transactional
-	@Query(value ="DELETE FROM wishlist WHERE USER_ID= :userId AND PRODUCT_ID= :productId; ",
-			nativeQuery = true)
-	void deleteByUserANDProduct(
-			@Param("userId") BigDecimal userId, 
-			@Param("productId") BigDecimal productId );
 	
-	@Modifying
-	@Transactional
-	@Query(value ="DELETE FROM wishlist WHERE USER_ID= 966 AND PRODUCT_ID= 2940; ",
-			nativeQuery = true)
-	void deleteByUserANDProduct2();
 	
 
 

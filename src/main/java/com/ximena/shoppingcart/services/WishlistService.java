@@ -20,4 +20,7 @@ public interface WishlistService {
 	public List<Wishlist> getWishlistByUserId(BigDecimal userId);
 
 	public ResponseEntity<Object> removeProduct(Map<String, BigDecimal[]> productIdArray, BigDecimal userId);
+
+	public ResponseEntity<Object> deleteWishlist(BigDecimal userId);
 }
+

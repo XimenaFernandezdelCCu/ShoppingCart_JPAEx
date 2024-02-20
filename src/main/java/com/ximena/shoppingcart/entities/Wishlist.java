@@ -18,7 +18,7 @@ public class Wishlist {
     @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomIdGenerator.class)
 	private java.math.BigDecimal wishId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="USER_ID")
 	private User userId;
 	

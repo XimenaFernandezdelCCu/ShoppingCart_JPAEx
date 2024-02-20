@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.ximena.shoppingcart.entities.Product;
 import com.ximena.shoppingcart.entities.User;
@@ -72,22 +73,17 @@ public class WishlistServiceImpl implements WishlistService {
 	
 	// ------------ Remove Products from Wishlist
 	public ResponseEntity<Object> removeProduct(Map<String, BigDecimal[]> productIdArray, BigDecimal userId){
-		// Get the User and their name
+		// Get the User
 		Optional<User> user = userRepository.findById(userId);
-		String userName = user.get().getName() + user.get().getLastName();
-		
 		// Get the Array of the products to delete:
 		BigDecimal[] idArrayVals = productIdArray.get("products");
-		
 		// Get all the User's Wishlists 
 		List<Wishlist> allProductsinWhishlistbyUser = repository.findByUserId(user.get());
-		
 		//Create an Array to store Deleted Products 
 		List<Product> deletetedProducts = new ArrayList<>();
 		
 		//Loop the products to delete:
 		for (BigDecimal productId : idArrayVals ) {
-			
 			try {
 				//Get the Product by the id provided:
 				Optional<Product> product = productsRepository.findById(productId);
@@ -97,9 +93,7 @@ public class WishlistServiceImpl implements WishlistService {
 			    	for (Wishlist wishlist : allProductsinWhishlistbyUser ) {
 			    		Product productInList = wishlist.getProductId();
 			    		BigDecimal productInListId = productInList.getProductId();
-			    		System.out.println("--------- id of products in list: "+ productInListId + "------ id to delete: "+ productId );
 			    		if(productInListId.equals(productId)) {
-			    			System.out.println("--------- IN ---------");
 			    			repository.delete(wishlist);
 			    			break;
 			    		}
@@ -113,11 +107,25 @@ public class WishlistServiceImpl implements WishlistService {
 			  	
 		}
 		
-		String message = "Deleted the following products from " + userName + "'s Wishlist.";
-		return ResponseEntity.ok(deletetedProducts);
-		 
+		return ResponseEntity.ok(deletetedProducts); 
 	}
 	
+	// ----------- DELETE user's wishlist 
+	public ResponseEntity<Object> deleteWishlist(BigDecimal userId){
+		try {
+			Optional<User> user = userRepository.findById(userId);
+			List<Wishlist> usersWishlist = repository.findByUserId(user.get());
+			for (Wishlist list : usersWishlist) {
+				repository.delete(list);
+			}
+			return ResponseEntity.ok(user);
+			
+			
+		} catch (NoSuchElementException e) {
+			String message = "Couldn't find the User with ID: " + userId + ". Please try with another id.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+		}
+	}
 	
 		
 

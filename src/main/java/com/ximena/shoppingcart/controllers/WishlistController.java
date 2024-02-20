@@ -47,5 +47,9 @@ public class WishlistController {
 		return service.removeProduct(productIdArray, userId);
 	}
 	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Object> deleteWishlist(@PathVariable("id")java.math.BigDecimal userId){
+		return service.deleteWishlist(userId);
+	}
 	
 }
