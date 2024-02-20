@@ -43,6 +43,7 @@ Test the funcionality of this code using Postman (or other web API testing appli
 | /product/save | POST     | Saves a new product to the DB or increments the inventory of an existing product by one.  |
 | /product/edit/{id} | PUT | Update price, image, description and total_products_inventory of a Product. |
 | /product/delete/{id} | PUT | Sets the Status collumn of a product to false. |
+| /wishlist/save/{arg} | POST | Creates a wishlist instance in the DB with the user Id from the argument {arg} and the Id from the products to be added in the body. |
 
 
 ### Request Body Format Examples
@@ -76,7 +77,10 @@ Test the funcionality of this code using Postman (or other web API testing appli
         "description": "Rayban",
         "totalProductsInventory": 5
     }
-
+#### POST: /wishlist/save/{arg}
+{
+    "products": [2940, 255, 8031, 9531]
+}
 
 
 ## Tests Instructions
