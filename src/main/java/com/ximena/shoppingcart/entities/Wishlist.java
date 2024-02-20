@@ -22,7 +22,7 @@ public class Wishlist {
 	@JoinColumn(name="USER_ID")
 	private User userId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product productId;
 
@@ -48,6 +48,11 @@ public class Wishlist {
 
 	public void setProductId(Product productId) {
 		this.productId = productId;
+	}
+
+	@Override
+	public String toString() {
+		return "Wishlist [wishId=" + wishId + ", userId=" + userId + ", productId=" + productId + "]";
 	}
 	
 	

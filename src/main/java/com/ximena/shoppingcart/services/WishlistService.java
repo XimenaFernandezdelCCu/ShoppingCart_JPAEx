@@ -18,4 +18,6 @@ public interface WishlistService {
 	public ResponseEntity<Object> insertProduct(Map<String, java.math.BigDecimal[]> idArray, java.math.BigDecimal id );
 
 	public List<Wishlist> getWishlistByUserId(BigDecimal userId);
+
+	public ResponseEntity<Object> removeProduct(Map<String, BigDecimal[]> productIdArray, BigDecimal userId);
 }

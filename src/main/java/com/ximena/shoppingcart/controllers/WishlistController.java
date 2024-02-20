@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,13 @@ public class WishlistController {
 			@PathVariable("arg")java.math.BigDecimal userId ){
 		return service.insertProduct(productIdArray, userId);
 	}
-	//ResponseEntity<Object> insertProduct(Map<String, java.math.BigDecimal[]> idArray, java.math.BigDecimal id )
+	
+	@DeleteMapping("/{id}/remove")
+	public ResponseEntity<Object> removeProduct(
+			@RequestBody Map<String, java.math.BigDecimal[]> productIdArray, 
+			@PathVariable("id")java.math.BigDecimal userId){
+		return service.removeProduct(productIdArray, userId);
+	}
+	
 	
 }
