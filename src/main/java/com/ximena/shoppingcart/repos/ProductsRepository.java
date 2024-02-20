@@ -14,7 +14,8 @@ public interface ProductsRepository extends CrudRepository<Product, java.math.Bi
 	
 	List<Product> findByName(String name);
 	List<Product> findByPrice(double price);
-	
+	List<Product> findByProductId(java.math.BigDecimal id);
+
 	@Query(value = "SELECT name  FROM products", nativeQuery = true)
 	List<String> findAllNames();
 	

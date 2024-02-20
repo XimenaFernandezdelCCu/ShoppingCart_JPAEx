@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 
 
 @Repository
-public interface OrdersRepository extends CrudRepository<Order, java.math.BigDecimal> {
+public interface OrdersRepository extends CrudRepository<Order, BigDecimal> {
 	
 	@Query("SELECT orderId FROM Order")
-	List<java.math.BigDecimal> findAllIds();
+	List<BigDecimal> findAllIds();
 	
 	//List<Order> findByOrderId(BigDecimal orderId);
 	List<Order> findByUser(User user);
@@ -25,6 +25,6 @@ public interface OrdersRepository extends CrudRepository<Order, java.math.BigDec
 	//@Query("FROM Order WHERE User = :userId")
 	//List<Order> findByUserId(java.math.BigDecimal);
 	@Query(value = "SELECT * FROM ORDER_HISTORY WHERE USER_ID = :userId", nativeQuery = true)
-	List<Order> findOrderByUserId(@Param("userId") java.math.BigDecimal userId);
+	List<Order> findOrderByUserId(@Param("userId") BigDecimal userId);
 
 }

@@ -1,5 +1,6 @@
 package com.ximena.shoppingcart.entities;
 
+import java.util.Date;
 import java.util.List;
 
 //import java.sql.Date;
@@ -39,6 +40,15 @@ public class Order {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product products;
+	
+	
+
+	public Order(Date orderDate, User user, Product products) {
+		super();
+		this.orderDate = orderDate;
+		this.user = user;
+		this.products = products;
+	}
 
 	public java.math.BigDecimal getOrderId() {
 		return orderId;
