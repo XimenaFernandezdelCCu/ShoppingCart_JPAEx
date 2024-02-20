@@ -17,7 +17,7 @@ public class User {
 	//@GenericGenerator(name="user_id", strategy="com.ximena.shoppingcart.CustomIdGenerator") deprecated 
 	
 	@GeneratedValue(generator = "custom-id")
-    @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomUserIdGenerator.class)
+    @GenericGenerator(name = "custom-id", type = com.ximena.shoppingcart.generators.CustomIdGenerator.class)
 	@Column(name = "USER_ID")
 	private java.math.BigDecimal userId;
 	private String name; 

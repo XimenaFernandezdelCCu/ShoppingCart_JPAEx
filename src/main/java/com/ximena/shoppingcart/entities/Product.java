@@ -7,9 +7,11 @@ import jakarta.persistence.GeneratedValue;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 
 @Entity
-public class Products {
+@Table(name="PRODUCTS")
+public class Product {
 	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY) 

@@ -1,7 +1,10 @@
 package com.ximena.shoppingcart.controllers;
 
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +23,10 @@ import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.repos.UsersRepository;
 import com.ximena.shoppingcart.services.UserService;
 
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
-	
 	
 	@Autowired
 	private UsersRepository repository;
@@ -32,70 +34,35 @@ public class UserController {
 	@Autowired
 	private UserService service; 
 	
-	// gets all users 
+	
+	// ------------ gets all users 
 	@GetMapping("/all")
 	public List<User> getUsers(){
 		return (List<User>) repository.findAll();  
 	}
 	
-	//finds one user by email or by name.
+	// ------------  finds one user by email or by name.
 	@GetMapping("/{arg}")
-	//public List<User> getUser(@RequestParam("arg") String arg) {
-	public List<User> getUser(@PathVariable("arg") String arg) {
-		if (arg.contains("@")) {
-			return repository.findByEmail(arg);
-		} else {
-			return repository.findByName(arg);
-		}
-		
+	public List<User> getOneUser(@PathVariable("arg") String arg) {
+		return service.getOneUser(arg);
 	}
 	
-	// saves a new user to DB with details provided in the request body 
+	// ------------ saves a new user to DB with details provided in the request body 
 	@PostMapping("/save")
 	public ResponseEntity<Object> insertNewUser(@RequestBody User user) {
-		List<String> existingEmails = repository.findAllEmail();
-		String newEmail = user.getEmail();
-		
-		for (String mail : existingEmails) {
-			if (newEmail.equals(mail)) {
-				String message = "User with email " + newEmail + " already exists.";
-	            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
-			}
-		}
-		
-		User savedUser = repository.save(user);
-	    return ResponseEntity.ok(savedUser);
+		return service.insertNewUser(user);
 	}
 	
-	// Edits a user's (found by their id) email and area of interest. 
+	// ------------ Edits a user's (found by their id) email and area of interest. 
 	@PutMapping("/edit/{id}")
 	public ResponseEntity<Object> editUser(@RequestBody  Map<String, Object> changes, @PathVariable("id") java.math.BigDecimal id){
-		Optional<User> optionalUser = repository.findById(id);
-		if (!optionalUser.isPresent()) {
-			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-		}	
-		User user = optionalUser.get();
-		user.setEmail((String) changes.get("email"));
-		user.setAreaOfInterest((String) changes.get("areaOfInterest"));
-        repository.save(user); 
-        
-        return ResponseEntity.ok(user); 
+        return service.editUser(changes, id) ; 
 	}
 		
-	// Deletes a user.
+	// ------------ Deletes a user.
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable("id") java.math.BigDecimal id){
-	
-		Optional<User> optionalUser = repository.findById(id);
-		if (!optionalUser.isPresent()) {
-			String message = "Couldn't find User with ID: " + id + ". Please try with another id.";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-		}	
-		
-		repository.deleteById(id);
-        
-        return ResponseEntity.ok(optionalUser.get()); 
+        return service.deleteUser(id); 
 	}
 	
 

@@ -1,5 +1,6 @@
 package com.ximena.shoppingcart.repos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,7 @@ public interface UsersRepository extends CrudRepository<User, java.math.BigDecim
 	List<java.math.BigDecimal> findAllIds();
 	
 	@Query(value = "SELECT email FROM users", nativeQuery = true)
-	List<String> findAllEmail();
+	ArrayList<String> findAllEmail();
 	
 	List<User> findByName(String name);
 	List<User> findByEmail(String email);	

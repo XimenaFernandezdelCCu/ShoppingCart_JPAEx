@@ -1,4 +1,4 @@
-package com.ximena.shoppingcart.generators;
+/*package com.ximena.shoppingcart.generators;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -22,10 +22,12 @@ public class CustomUserIdGenerator implements IdentifierGenerator {
 	//private UsersRepository repository;
 	@Autowired
 	private UserService service; 
+	@Autowired
+	
 	
 	@Override
 	public java.math.BigDecimal generate(SharedSessionContractImplementor session, Object object) {
 		return service.generateID();
 	}
 
-}
+}*/

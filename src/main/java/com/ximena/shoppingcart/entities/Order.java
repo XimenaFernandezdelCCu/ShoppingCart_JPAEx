@@ -1,5 +1,7 @@
 package com.ximena.shoppingcart.entities;
 
+import java.util.List;
+
 //import java.sql.Date;
 
 
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -18,7 +21,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="ORDER_HISTORY")
-public class Orders {
+public class Order {
 	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -29,13 +32,13 @@ public class Orders {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date orderDate;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="USER_ID", nullable= false)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="USER_ID")
 	private User user;
 	
-	//@OneToMany(cascade=CascadeType.ALL)
-	//@JoinColumn(name = "ORDER_ID" , nullable= false)
-	//private List<Products> products;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "PRODUCT_ID")
+	private Product products;
 
 	public java.math.BigDecimal getOrderId() {
 		return orderId;
@@ -59,6 +62,14 @@ public class Orders {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Product getProducts() {
+		return products;
+	}
+
+	public void setProducts(Product products) {
+		this.products = products;
 	}
 
 	

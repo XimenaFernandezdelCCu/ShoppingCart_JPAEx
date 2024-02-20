@@ -1,4 +1,4 @@
-package com.ximena.shoppingcart.generators;
+/*package com.ximena.shoppingcart.generators;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -27,4 +27,4 @@ public class CustomProductIdGenerator implements IdentifierGenerator {
 		}
 	}
 
-}
+}*/
