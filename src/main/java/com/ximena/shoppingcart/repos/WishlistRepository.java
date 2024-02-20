@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ximena.shoppingcart.entities.User;
 import com.ximena.shoppingcart.entities.Wishlist;
 
 @Repository
@@ -13,5 +14,7 @@ public interface WishlistRepository extends CrudRepository<Wishlist, java.math.B
 	
 	@Query("SELECT wishId FROM Wishlist")
 	List<java.math.BigDecimal> findAllIds();
+	
+	List<Wishlist> findByUserId(User userId);
 
 }
